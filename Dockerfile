@@ -2,6 +2,7 @@ FROM node:16 as installer
 COPY . /juice-shop
 WORKDIR /juice-shop
 RUN npm i -g typescript ts-node
+RUN npm install --save core-js@^3.3
 RUN npm install --production --unsafe-perm
 RUN npm dedupe
 RUN rm -rf frontend/node_modules
@@ -36,4 +37,4 @@ RUN npm explore @datadog/native-appsec -- npm run install
 # USER 1001
 
 EXPOSE 3000
-#CMD ["npm", "start"]
+CMD ["npm", "start"]
