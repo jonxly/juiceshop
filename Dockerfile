@@ -36,4 +36,4 @@ RUN npm explore @datadog/native-appsec -- npm run install
 # USER 1001
 
 EXPOSE 3000
-#CMD ["npm", "start"]
+CMD ["npm", "start"]
