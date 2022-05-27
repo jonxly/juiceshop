@@ -19,9 +19,18 @@ services:
       - "3000:3000"
     tty: true
     stdin_open: true
+    restart: on-failure
 
   datadog-agent:
     image: datadog/agent
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - IPC_LOCK
     environment:
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
@@ -30,6 +39,9 @@ services:
       - DD_CONTAINER_EXCLUDE="name:datadog-agent"
       - DD_PROCESS_AGENT_ENABLED=true
       - DD_COMPLIANCE_CONFIG_ENABLED=true
+      - DD_RUNTIME_SECURITY_CONFIG_ENABLED=true
+      - DD_SYSTEM_PROBE_ENABLED=true
+      - DD_ENV=juice
       - HOST_ROOT=/host/root
     env_file:
       - ./.env
@@ -42,6 +54,8 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /etc/passwd:/etc/passwd:ro 
       - /etc/os-release:/host/etc/os-release:ro
+      - /etc/group:/etc/group:ro
+      - /sys/kernel/debug:/sys/kernel/debug
       - /:/host/root:ro
 
   db:
@@ -53,3 +67,7 @@ services:
       MYSQL_DATABASE: juiceshop
       MYSQL_USER: dev
       MYSQL_PASSWORD: example
+    healthcheck:
+      test: "mysqladmin -u root -pexample ping"
+      interval: 2s
+      retries: 60     
