@@ -1,13 +1,14 @@
 # ![Juice Shop Logo](https://raw.githubusercontent.com/juice-shop/juice-shop/master/frontend/src/assets/public/images/JuiceShop_Logo_100px.png) OWASP Juice Shop
 
-> [The most trustworthy online shop out there.](https://twitter.com/dschadow/status/706781693504589824)
+### Instructions
+Today we will Juiceshop for a simple CTF :)
+Pull the repo and run docker compose on your local machine 
 
 OWASP Juice Shop is probably the most modern and sophisticated insecure web application! It can be used in security
 trainings, awareness demos, CTFs and as a guinea pig for security tools! Juice Shop encompasses vulnerabilities from the
 entire
 [OWASP Top Ten](https://owasp.org/www-project-top-ten) along with many other security flaws found in real-world
 applications!
-Today we will use it for a simple CTF :)
 
 ![Juice Shop Screenshot Slideshow](screenshots/slideshow.gif)
 
